@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 3</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <form name="customer" id="customer" action="?" class="col-sm-6">
+        <div class="row">
+            <label for="customer_name" class="col-sm-3">Name</label>
+            <input type="text" name="customer_name" id="customer_name" class="col-sm-6" placeholder="Name">
+        </div>
+        <div class="row">
+            <label for="customer_zip" class="col-sm-3">Zip Code</label>
+            <input type="number" name="customer_name" id="customer_zip" class="col-sm-6" placeholder="Zip Code">
+        </div>
+        <div class="row">
+            <label for="customer_town" class="col-sm-3">Town</label>
+            <input type="text" name="customer_name" id="customer_town" class="col-sm-6" placeholder="Town">
+        </div>
+        <div class="row">
+            <input type="submit">
+        </div>
+        <div class="row">
+            <div class="error_container">
+
+            </div>
+        </div>
+    </form>
+    <style>
+        #customer{
+            padding: 20px;
+            border: 1px solid grey;
+            border-radius: 15px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #customer>.row{
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+        .error_container{
+            display: none;
+            padding: 10px;
+            border-radius: 5px;
+            border:3px solid green;
+            color: white;
+        }
+        .error{
+            border:3px solid red;
+            background-color: darkred;
+        }
+        .ok{
+            border: 3px solid green;
+            background-color: lightgreen;
+        }
+        input[type=submit]{
+            padding: 6px;
+            color: white;
+            border-radius: 4px;
+            background-color: limegreen;
+        }
+    </style>
+    <script>
+        $('#customer').submit(function (e) {
+            e.preventDefault();
+            $('.error_container').show();
+            let errors = [];
+            if($('#customer_name').val().length<2){
+                errors.push('Name too short');
+            }
+            if($('#customer_town').val().length<2){
+                errors.push('Town too short');
+            }
+            if($('#customer_zip').val().length!=5){
+                errors.push('Wrong Zip');
+            }
+            if(!errors.length){
+                $('.error_container').addClass('ok').removeClass('error').html('<p>Everything is ok</p>');
+            }
+            else{
+                $('.error_container').addClass('error').removeClass('ok').html(errors.join(';<br>'));
+            }
+        });
+    </script>
+</body>
+</html>
